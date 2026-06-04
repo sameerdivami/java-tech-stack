@@ -38,17 +38,29 @@ cp .env.example .env
 Edit `.env`:
 
 ```env
+# Server
+SERVER_PORT=8080
+
+# PostgreSQL
 DB_URL=jdbc:postgresql://localhost:5432/family_league
 DB_USERNAME=postgres
 DB_PASSWORD=your_postgres_password
 
+# JWT
 JWT_SECRET=any_random_string_minimum_32_characters_long
+JWT_EXPIRATION_MS=86400000
 
+# SMTP
 MAIL_HOST=smtp.gmail.com
 MAIL_PORT=587
 MAIL_USERNAME=your_email@gmail.com
 MAIL_PASSWORD=your_app_password
 MAIL_FROM=your_email@gmail.com
+
+# Prediction settings
+MATCH_LOCK_MINUTES=60
+LEAGUE_LOCK_HOURS=4
+REMINDER_BEFORE_LOCK_MINUTES=30
 ```
 
 > Mail fields are required by Spring but emails are only sent when the scheduler triggers — the app runs fine without a working SMTP for basic testing.
