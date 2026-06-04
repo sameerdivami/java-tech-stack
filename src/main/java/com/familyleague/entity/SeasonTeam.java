@@ -1,0 +1,28 @@
+package com.familyleague.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+// Junction table: which teams participate in a given season
+@Entity
+@Table(name = "season_teams",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"season_id", "team_id"}))
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class SeasonTeam extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "season_id", nullable = false)
+    private Season season;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "team_id", nullable = false)
+    private Team team;
+}
